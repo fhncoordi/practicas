@@ -1,0 +1,4 @@
+HELICE{lf1_p4r4m_w1th0ut_s4n1t1z4t10n}
+
+Pista para la siguiente fase: el log de acceso de nginx en este contenedor
+está en /var/log/nginx/access.log y es legible para el proceso PHP.

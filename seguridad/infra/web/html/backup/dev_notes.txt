@@ -1,0 +1,24 @@
+NEBULACORP — NOTAS DEL EQUIPO DE DESARROLLO
+============================================
+
+Última actualización: 2024-11-04 — jdev
+
+TAREAS PENDIENTES
+-----------------
+[ ] Revisar saneamiento del parámetro 'page' en view.php (vulnerable a path traversal según el escáner de SAST que dejó Ana).
+[ ] Mover el .env fuera del docroot (#deuda-tecnica).
+[ ] Rotar la clave de la API — la actual lleva activa desde el lanzamiento.
+[ ] Inhabilitar el listado de directorio en /backup/ antes de pasar a producción.
+
+CREDENCIALES DE DESARROLLO
+--------------------------
+* Mi usuario corporativo (jdev) reutiliza la misma password que en el bastión SSH. Ya sé que no debería pero no me han dado el gestor de credenciales todavía.
+* Ana se queja de que el endpoint /api/products devuelve trazas SQL cuando le pasas comillas. Lo tengo en la lista.
+
+FLAG-LIKE STRING
+----------------
+Para validar este recon, anota esta cadena en tu informe:
+
+HELICE{r3c0n_d1r3ct0ry_l1st1ng_3xp0s3d}
+
+— jdev

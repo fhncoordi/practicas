@@ -1,0 +1,95 @@
+name: helice-negra
+
+networks:
+  dmz:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.10.0/24
+  interna:
+    driver: bridge
+    internal: false
+    ipam:
+      config:
+        - subnet: 172.30.20.0/24
+  gestion:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.30.0/24
+
+services:
+  web-nebula:
+    build: ./web
+    container_name: web-nebula
+    hostname: web-nebula
+    networks:
+      dmz:
+        ipv4_address: 172.30.10.10
+      interna:
+        ipv4_address: 172.30.20.10
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      - api-nebula
+
+  api-nebula:
+    build: ./api
+    container_name: api-nebula
+    hostname: api-nebula
+    networks:
+      interna:
+        ipv4_address: 172.30.20.20
+    environment:
+      DB_HOST: db-nebula
+      DB_USER: appuser
+      DB_PASS: app_2024_pwd
+      DB_NAME: nebula
+      API_KEY: helice-2891fa9c-nebula
+    restart: unless-stopped
+    depends_on:
+      db-nebula:
+        condition: service_healthy
+
+  db-nebula:
+    build: ./db
+    container_name: db-nebula
+    hostname: db-nebula
+    networks:
+      interna:
+        ipv4_address: 172.30.20.30
+    environment:
+      MARIADB_ROOT_PASSWORD: root_only_internal
+      MARIADB_DATABASE: nebula
+      MARIADB_USER: appuser
+      MARIADB_PASSWORD: app_2024_pwd
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  bastion-nebula:
+    build: ./bastion
+    container_name: bastion-nebula
+    hostname: bastion-nebula
+    networks:
+      interna:
+        ipv4_address: 172.30.20.40
+      gestion:
+        ipv4_address: 172.30.30.10
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+
+  vault-nebula:
+    build: ./vault
+    container_name: vault-nebula
+    hostname: vault-nebula
+    networks:
+      gestion:
+        ipv4_address: 172.30.30.20
+    restart: unless-stopped

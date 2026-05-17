@@ -1,0 +1,15 @@
+Bienvenido al bastión de gestión de NebulaCorp.
+
+Este host pertenece a dos redes:
+ - interna (172.30.20.0/24) — donde está la BBDD y la API
+ - gestion (172.30.30.0/24) — donde vive la bóveda interna (vault-nebula)
+
+Desde aquí se puede acceder a vault-nebula (HTTP/80). El endpoint /admin/dump
+requiere un token de autorización que se guarda en /root/.vault_token y SÓLO
+es legible por el superusuario.
+
+Si necesitas elevarte para tareas administrativas, recuerda que el equipo de
+sistemas dejó concedido `sudo find` sin password para los desarrolladores
+mientras dura la migración (issue #1042).
+
+— sysadmin@nebulacorp

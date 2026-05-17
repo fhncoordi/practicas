@@ -1,0 +1,8 @@
+HELICE{l0g_p01s0n1ng_rc3_unl0ck3d}
+
+Estás dentro del contenedor web-nebula. Recuerda que está en dos redes:
+ - dmz       (172.30.10.0/24) — accesible desde el host
+ - interna   (172.30.20.0/24) — donde viven la API y la BBDD
+
+La API REST de NebulaCorp escucha en http://api-nebula:5000 y exige la
+cabecera X-API-Key con la clave que ya tienes del fichero .env.

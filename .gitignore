@@ -1,0 +1,15 @@
+# Ficheros docente — nunca se publican en este repo
+**/walkthrough_completo.*
+**/FLAGS.md
+
+# Macros del editor / IDE
+.idea/
+.vscode/
+*.iml
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Docker — runtime
+**/.docker-data/

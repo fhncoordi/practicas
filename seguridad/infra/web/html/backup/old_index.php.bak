@@ -1,0 +1,8 @@
+<?php
+// Versión antigua del visor — sustituida por view.php
+// Nota: el parámetro 'page' acepta rutas relativas y absolutas; revisar antes de
+// producción. Comportamiento esperado: si la ruta no resuelve a una página
+// válida, hace include() del valor recibido tal cual.
+$p = $_GET['page'] ?? 'about';
+include('/var/www/html/pages/' . $p . '.php');
+?>
